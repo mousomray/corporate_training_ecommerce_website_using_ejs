@@ -1,0 +1,220 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+  <div class="sidebar-content js-simplebar">
+    <a class="sidebar-brand" href="index.html">
+      <span class="align-middle">🌟 Admin Panel</span>
+    </a>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-header">📌 Navigation</li>
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="<%= generateUrl('profile') %>">
+          <i class="align-middle" data-feather="user"></i>
+          <span class="align-middle">Profile</span>
+        </a>
+      </li>
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="<%= generateUrl('categorylist') %>">
+          <i class="align-middle" data-feather="book"></i>
+          <span class="align-middle">Categories</span>
+        </a>
+      </li>
+
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="<%= generateUrl('productlist') %>">
+          <i class="align-middle" data-feather="box"></i>
+          <span class="align-middle">Products</span>
+        </a>
+      </li>
+
+      <!-- Category Dropdown -->
+      <li class="sidebar-item dropdown">
+        <a class="sidebar-link dropdown-toggle" href="#">
+          <i class="align-middle" data-feather="grid"></i>
+          <span class="align-middle">Categories</span>
+        </a>
+        <ul class="sidebar-dropdown">
+          <% categories.forEach((cat) => { %>
+          <li>
+            <a href="<%= generateUrl('categorywiseproduct', { id: cat._id }) %>">
+              <%= cat.name %>
+            </a>
+          </li>
+          <% }) %>
+        </ul>
+      </li>
+
+      <!-- Product Search -->
+      <li class="sidebar-item">
+        <form action="<%= generateUrl('searchproduct') %>" method="GET" class="sidebar-search">
+          <div class="search-box">
+            <input type="text" class="form-control" placeholder="🔍 Search products..." name="title" id="search" />
+            <button type="submit" class="btn-search">
+              <i data-feather="search"></i>
+            </button>
+          </div>
+        </form>
+      </li>
+
+      <!-- Price Range -->
+      <li class="sidebar-item">
+        <form action="<%= generateUrl('filterproduct') %>" method="GET" class="sidebar-price-range">
+          <label for="min-price" class="form-label">💰 Min Price</label>
+          <input type="number" class="form-control" id="min-price" name="min" min="0" max="1000" step="10" value="0" required />
+
+          <label for="max-price" class="form-label">💰 Max Price</label>
+          <input type="number" class="form-control" id="max-price" name="max" min="0" max="1000" step="10" value="1000" required />
+
+          <button type="submit" class="btn btn-filter">Apply Filter</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 🌈 CSS Styling -->
+<style>
+  /* Sidebar Layout */
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding-top: 15px;
+  }
+
+  .sidebar-content {
+    padding: 20px;
+  }
+
+  .sidebar-brand {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    color: white;
+    padding: 15px 0;
+    text-decoration: none;
+  }
+
+  .sidebar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .sidebar-item {
+    margin-bottom: 12px;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-link i {
+    margin-right: 10px;
+  }
+
+  /* Dropdown Styling */
+  .sidebar-dropdown {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+  }
+
+  .dropdown:hover .sidebar-dropdown {
+    display: block;
+  }
+
+  .sidebar-dropdown li {
+    padding: 6px 0;
+  }
+
+  .sidebar-dropdown a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .sidebar-dropdown a:hover {
+    text-decoration: underline;
+  }
+
+  /* Search Box */
+  .search-box {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .search-box input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+  }
+
+  .btn-search {
+    background: #ff6b6b;
+    border: none;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .btn-search:hover {
+    background: #ff4757;
+  }
+
+  /* Price Range */
+  .sidebar-price-range {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+  }
+
+  .form-label {
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+
+  .btn-filter {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .btn-filter:hover {
+    background: #218838;
+  }
+</style>
+
+<!-- 🚀 JavaScript for Icons -->
+<script>
+  feather.replace();
+</script>

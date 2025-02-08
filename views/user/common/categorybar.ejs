@@ -1,0 +1,72 @@
+<div class="left-sidebar">
+    <h2>Category</h2>
+    <!--Category start-->
+    <div class="brands_products">
+      <div class="brands-name">
+        <ul class="nav nav-pills nav-stacked">
+          
+          <% categories.forEach((item) =>{ %>
+            <li>
+              <a href="<%= generateUrl('catwiseproduct', { id: item._id.categoryId }) %>"><span><%=item._id.name%></span> (<%=item.totalproducts %>)</a>
+            </li>
+          <% }) %>
+
+        </ul>
+      </div>
+    </div>
+    <!--Category end-->
+
+    <div class="price-range">
+      <!--price-range-->
+      <h2>Price Range</h2>
+      <div class="well text-center">
+        <input
+          type="range"
+          id="min-price-input"
+          min="0"
+          max="1000"
+          step="5"
+          value="250"
+          oninput="updatePriceRange()"
+        />
+        <input
+          type="range"
+          id="max-price-input"
+          min="0"
+          max="1000"
+          step="5"
+          value="450"
+          oninput="updatePriceRange()"
+        />
+        <br />
+        <b class="pull-left">$ <span id="min-price">250</span></b>
+        <b class="pull-right">$ <span id="max-price">450</span></b>
+        <br /><br />
+        <button onclick="applyFilter()">Filter</button>
+      </div>
+    </div>
+
+    <div class="shipping text-center">
+      <!--shipping-->
+      <img src="/images/home/shipping.jpg" alt="" />
+    </div>
+    <!--/shipping-->
+  </div>
+</div>
+
+<script>
+  function updatePriceRange() {
+    // Update the displayed min and max price values
+    document.getElementById("min-price").innerText = document.getElementById("min-price-input").value;
+    document.getElementById("max-price").innerText = document.getElementById("max-price-input").value;
+  }
+
+  function applyFilter() {
+    // Get the selected price range
+    const minPrice = document.getElementById("min-price-input").value;
+    const maxPrice = document.getElementById("max-price-input").value;
+
+    // Redirect to the filtered URL
+    window.location.href = `/user/pricefilter?min=${minPrice}&max=${maxPrice}`;
+  }
+</script>
