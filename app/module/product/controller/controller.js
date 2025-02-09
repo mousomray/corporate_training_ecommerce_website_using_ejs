@@ -1,5 +1,6 @@
 const ProductRepo = require('../repository/productrepo')
 const CategortRepo = require('../../category/repository/CategoryRepo')
+const OrderRepo = require('../../product/repository/orderrepo')
 const path = require('path');
 const fs = require('fs');
 
@@ -187,6 +188,28 @@ class productAdminController {
             res.status(500).json({ message: "Error retrieving answers" });
         }
     }
+
+    // Admin Order list
+    async OrderList(req, res) {
+        const orders = await OrderRepo.adminOrders();
+        console.log("Order data...", orders)
+        const categories = await CategortRepo.allCategories();
+        return res.render('admin/product/orderlist', { categories, orders, user: req.user })
+    }
+
+    async StatusUpdate(req, res) {
+        try {
+            const { orderId, status } = req.body;
+            if (!["pending", "processing", "shipped", "delivered", "cancelled"].includes(status)) {
+                return res.status(400).send("Invalid status");
+            }
+            await OrderRepo.updateStatus(orderId,status)
+            res.redirect(generateUrl('adminorderlist'));
+        } catch (error) {
+            console.error("Error updating order status:", error);
+            res.status(500).send("Internal Server Error");
+        }
+    };
 
 }
 

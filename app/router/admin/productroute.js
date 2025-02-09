@@ -17,5 +17,7 @@ namedRouter.post('updateproduct', '/admin/updateproduct/:id', AdminuiAuth, uploa
 namedRouter.get('deleteproduct', '/admin/deleteproduct/:id', AdminuiAuth, productController.deleteproduct)
 namedRouter.get('filterproduct', '/admin/filterproduct', AdminuiAuth, productController.filterByPrice)
 namedRouter.get('searchproduct', '/admin/searchproduct', AdminuiAuth, productController.search)
+namedRouter.get('adminorderlist', '/admin/orderlist', AdminuiAuth, productController.OrderList)
+namedRouter.post('updateorderstatus','/admin/updateorderstatus',AdminuiAuth, productController.StatusUpdate);
 
 module.exports = router; 

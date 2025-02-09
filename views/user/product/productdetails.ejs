@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../common/head.ejs')%>
+  <!--/head-->
+
+  <body>
+    <%- include('../common/header.ejs')%>
+    <!--/header-->
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            
+			<%- include('../common/categorybar.ejs')%>
+
+          <div class="col-sm-9 padding-right">
+            <div class="product-details">
+              <!--product-details-->
+              <div class="col-sm-5">
+                <div class="view-product">
+                  <img src="http://localhost:3004/<%=product.image%>" alt="" />
+                  <h3>ZOOM</h3>
+                </div>
+                <div
+                  id="similar-product"
+                  class="carousel slide"
+                  data-ride="carousel"
+                >
+            </div>
+              </div>
+              <div class="col-sm-7">
+                <div class="product-information">
+                  <!--/product-information-->
+                  <img
+                    src="/images/product-details/new.jpg"
+                    class="newarrival"
+                    alt=""
+                  />
+                  <h2><%=product.title%></h2>
+                  <img src="/images/product-details/rating.png" alt="" />
+                  <span>
+                    <span>Price $<%=product.price%></span>
+                   <a href="<%=generateUrl('postorder',{id:product._id})%>">
+                    <button type="button" class="btn btn-fefault cart">
+                      <i class="fa fa-shopping-cart"></i>
+                      Order Now
+                    </button>
+                   </a>
+                 </span>
+                  <p><b>Available stock:</b> <%=product.stock%></p>
+                <a href=""
+                    ><img
+                      src="/images/product-details/share.png"
+                      class="share img-responsive"
+                      alt=""
+                  /></a>
+                </div>
+                <!--/product-information-->
+              </div>
+            </div>
+            <!--/product-details-->
+
+            <!--/recommended_items-->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include('../common/footer.ejs') %>
+  </body>
+</html>

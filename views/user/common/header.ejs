@@ -62,7 +62,7 @@
                 <a href="<%=generateUrl('account')%>"><i class="fa fa-user"></i><%= user.name %></a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-star"></i> Wishlist</a>
+                <a href="<%=generateUrl('orderlist')%>"><i class="fa fa-star"></i> Orderlist</a>
               </li>
               <li>
                 <a href="checkout.html"
@@ -88,7 +88,7 @@
                 <a href="#"><i class="fa fa-user"></i>Account</a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-star"></i> Wishlist</a>
+                <a href="<%=generateUrl('orderlist')%>"><i class="fa fa-star"></i> Orderlist</a>
               </li>
               <li>
                 <a href="checkout.html"
@@ -160,7 +160,7 @@
         <div class="col-sm-3">
           <div class="search_box pull-right">
             <form action="<%= generateUrl('usersearchproduct')%>">
-              <input type="text" name="title" placeholder="Search" />
+              <input type="text" name="title" placeholder="Search product" />
             </form>
           </div>
         </div>

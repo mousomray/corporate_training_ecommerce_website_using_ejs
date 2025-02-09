@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../common/head.ejs')%>
+
+  <body>
+    <%- include('../common/header.ejs')%>
+    <!--/header-->
+
+    <!-- Flash Messages -->
+    <% if (sucess && sucess != '') { %>
+    <div
+      class="alert alert-success"
+      role="alert"
+      style="
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        text-align: center;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000;
+      "
+    >
+      <%= sucess %>
+    </div>
+    <% } else if (err && err != '') { %>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      style="
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        text-align: center;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1000;
+      "
+    >
+      <%= err %>
+    </div>
+    <% } %>
+
+    <section id="order-form" style="margin-top: 80px; margin-bottom: 120px">
+      <div class="form-container">
+        <div class="form-card">
+          <h2 class="form-title">🛒 Product Order Form</h2>
+          <p class="form-subtitle">
+            Fill in the details below to place your order.
+          </p>
+
+          <form
+            action="<%=generateUrl('postordercreate',{id:product._id})%>"
+            method="POST"
+          >
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value="<%=user.name%>"
+                required
+                placeholder="Enter your name"
+                readonly
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value="<%=user.email%>"
+                required
+                placeholder="Enter your email"
+                readonly
+              />
+            </div>
+
+            <!-- Product Selection -->
+            <div class="form-group">
+              <label for="product">Selected Product</label>
+              <input
+                type="text"
+                id="producttitle"
+                name="producttitle"
+                value="<%=product.title%>"
+                required
+                placeholder="Enter your product title"
+                readonly
+              />
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                required
+                placeholder="Enter quantity"
+              />
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+              <label for="address">Shipping Address</label>
+              <textarea
+                id="address"
+                name="address"
+                rows="3"
+                required
+                placeholder="Enter your shipping address"
+              ></textarea>
+            </div>
+
+            <!-- Payment Method -->
+            <div style="margin-bottom: 15px; display: flex; gap: 10px">
+              <label style="font-weight: bold; color: #555"
+                >Payment Method:</label
+              >
+              <label
+                ><input type="radio" name="payment" value="Cash" /> Cash</label
+              >
+              <label
+                ><input type="radio" name="payment" value="Card" />Card</label
+              >
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit Order</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!--/form-->
+
+    <%- include('../common/footer.ejs')%>
+  </body>
+</html>
+
+<style>
+  /* Background & Container */
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: white;
+  }
+
+  /* Form Card */
+  .form-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  /* Title */
+  .form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  /* Subtitle */
+  .form-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  /* Form Group */
+  .form-group {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+
+  /* Labels */
+  .form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Input Fields */
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    margin-top: 5px;
+    outline: none;
+    transition: border 0.3s;
+  }
+
+  /* Input Focus */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #007bff;
+  }
+
+  /* Radio Group */
+  .radio-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  /* Button Hover */
+  .submit-btn:hover {
+    background: #0056b3;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 450px) {
+    .form-card {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+</style>
